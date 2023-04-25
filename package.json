@@ -1,6 +1,9 @@
 {
-  "name": "react_component_library_poc",
-  "version": "1.0.0",
+  "name": "@minuvinod2017/react_component_library_poc",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/minuvinod2017"
+  },
+  "version": "1.0.7",
   "description": "A simple POC for custom React component library",
   "scripts": {
     "rollup": "rollup -c"
@@ -15,6 +18,7 @@
     "react": "^18.2.0",
     "rollup": "^3.20.6",
     "rollup-plugin-dts": "^5.3.0",
+    "tslib": "^2.5.0",
     "typescript": "^5.0.4"
   },
   "main": "dist/cjs/index.js",

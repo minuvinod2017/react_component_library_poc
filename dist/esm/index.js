@@ -2803,5 +2803,49 @@ var Button = function (props) {
     return React.createElement("button", null, props.label);
 };
 
-export { Button };
+var FeelingForm = function (props) {
+    var _a = reactExports.useState('Happy'); _a[0]; _a[1];
+    var timerHandle = reactExports.useRef(null);
+    var _b = reactExports.useState(42), stateCounter = _b[0], setStateCounter = _b[1];
+    //   const onFeelingChange = useCallback(
+    //     (event: React.ChangeEvent<HTMLInputElement>) => {
+    //       setCurrentFeeling(event.currentTarget.value);
+    //     },
+    //     []
+    //   );
+    reactExports.useEffect(function () {
+        timerHandle.current = +setInterval(function () {
+            setStateCounter(stateCounter + 1);
+        }, 2500);
+        return function () {
+            if (timerHandle.current) {
+                clearInterval(timerHandle.current);
+                timerHandle.current = null;
+            }
+        };
+    });
+    props.counter; var onClick = props.onClick;
+    var handleClick = function () {
+        if (onClick) {
+            onClick();
+        }
+    };
+    //   const onSubmitEvent = useCallback(() => {
+    //     onSubmit(`${name} is feeling: ${currentFeeling}`);
+    //   }, [name, currentFeeling]);
+    return (
+    //<form onSubmit={onSubmitEvent}>
+    React.createElement("div", null,
+        React.createElement("label", { htmlFor: "feeling-input" }, "How are you feeling?"),
+        React.createElement("input", { id: "feeling-input" }),
+        React.createElement("div", null,
+            React.createElement("button", { type: "button", onClick: handleClick }, "click to increase"),
+            React.createElement("div", null,
+                "State counter: ",
+                stateCounter)))
+    //</form>
+    );
+};
+
+export { Button, FeelingForm };
 //# sourceMappingURL=index.js.map
