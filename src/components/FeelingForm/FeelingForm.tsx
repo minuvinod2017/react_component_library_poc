@@ -1,72 +1,39 @@
-import React, { useCallback, useEffect, useRef, useState} from 'react';
+import React, { useState} from 'react';
 
 export interface IFeelingFormProps {
-  name: string;
-  counter: number;
-  onClick?: () => void;
+name: string;
+counter: number;
+onClick?: (value: number) => void;
 }
 
 const FeelingForm: React.FC<IFeelingFormProps> = (props : IFeelingFormProps) => {
-//   const [currentFeeling, setCurrentFeeling] = useState('Happy');
-//   const timerHandle = useRef<number | null>(null);
-//   const [stateCounter, setStateCounter] = useState(42);
-//   const onFeelingChange = useCallback(
-//     (event: React.ChangeEvent<HTMLInputElement>) => {
-//       setCurrentFeeling(event.currentTarget.value);
-//     },
-//     []
-//   );
+const {counter: propsCounter, onClick, name} = props;
 
-//     useEffect(() => {
-//     timerHandle.current = +setInterval(() => {
-//       setStateCounter(stateCounter + 1);
-//     }, 2500);
+const [stateCounter, setStateCounter] = useState(propsCounter);
 
-//     return () => {
-//       if (timerHandle.current) {
-//         clearInterval(timerHandle.current);
-//         timerHandle.current = null;
-//       }
-//     };
-//   });
+const increment = () => {
+   setStateCounter(stateCounter + 1);
+   if (onClick) {
+     onClick(stateCounter + 1);
+   }
+};
 
-  const {counter: propsCounter, onClick} = props;
+const decrement = () => {
+   setStateCounter(stateCounter - 1);
+   if (onClick) {
+     onClick(stateCounter - 1);
+   }
+};
 
-  const useCounter = (initialValue = 0) => {
-    const [count, setCount] = useState(initialValue);
-  
-    const increment = () => setCount((count) => count + 1);
-    const decrement = () => setCount((count) => count - 1);
-  
-    return { count, increment, decrement };
-  }
-  
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-  };
-//   const onSubmitEvent = useCallback(() => {
-//     onSubmit(`${name} is feeling: ${currentFeeling}`);
-//   }, [name, currentFeeling]);
-
-  return (
-    //<form onSubmit={onSubmitEvent}>
-    <div >
-
-        <label htmlFor="feeling-input">How are you feeling?</label>
-        <a href="https://pluralsight.com">Visit Pluralsight</a>
-       {/* <input
-        id="feeling-input"
-        onChange={onFeelingChange}
-        value={currentFeeling}
-      />  */}
-      <div>
-        <button type="button" onClick={handleClick}>click to increase</button>
-        <div>State counter: {stateCounter}</div>
-      </div>
-    </div>
-  );
+return (
+   <div>
+     <div>
+       <button type="button" onClick={increment}>+</button>
+       <button type="button" onClick={decrement}>-</button>
+       <div>({name}) State counter: {stateCounter}</div>
+     </div>
+   </div>
+);
 };
 
 export default FeelingForm;
